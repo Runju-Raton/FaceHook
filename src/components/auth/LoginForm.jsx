@@ -1,12 +1,19 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Field from "../common/Field.jsx";
 import {useForm} from "react-hook-form";
+import {useAuth} from "../../hooks/useAuth.js";
 
 const LoginForm = () => {
+    const navigate = useNavigate();
+    const {setAuth} = useAuth();
     const {register, handleSubmit, formState: {errors}} = useForm();
     const submitForm = (formData) => {
-        console.log(formData);
+        const user = {...formData}
+        // Make an API call
+        // will return token and logged in user information
+        setAuth({user})
+        navigate('/');
     }
     return (
         <div className="card">
